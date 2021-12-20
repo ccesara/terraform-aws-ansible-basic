@@ -8,6 +8,8 @@
 ### 1 -> Infrastructure Deploy ( Terraform )
 cd terraform
 
+terraform init
+
 terraform apply
 
 
