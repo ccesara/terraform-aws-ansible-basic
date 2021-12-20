@@ -1,0 +1,18 @@
+- hosts: all
+  handlers:
+    - name: "nginx"
+      service:
+        name: nginx
+        state: restarted
+      become: yes
+  tasks:
+    - name: "setup-nginx"
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes
+      with_items:
+        - nginx
+    - name: "static-index"
+      shell: "echo \"nginx - $(date)\" > /var/www/html/index.html"
+      become: yes

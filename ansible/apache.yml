@@ -1,0 +1,18 @@
+- hosts: all
+  handlers:
+    - name: "apache2"
+      service:
+        name: apache2
+        state: restarted
+      become: yes
+  tasks:
+    - name: "setup-apache"
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes
+      with_items:
+        - apache2
+    - name: "static-index"
+      shell: "echo \"apache - $(date)\" > /var/www/html/index.html"
+      become: yes
